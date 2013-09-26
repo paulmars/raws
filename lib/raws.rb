@@ -11,4 +11,4 @@ AWS.config(
 )
 
 ec2 = AWS::EC2.new()
-puts "instances",ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
+puts ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
