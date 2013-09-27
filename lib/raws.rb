@@ -31,4 +31,12 @@ AWS.config(
 )
 
 ec2 = AWS::EC2.new()
-puts ec2.instances.inject({}) { |m, i| m[i.id] = i.status; m }
+puts ec2.instances.map{ |i|
+  [
+    i.instance_id,
+    i.status,
+    i.ip_address,
+    i.dns_name,
+    i.image_id
+  ]
+}.join("\t")
