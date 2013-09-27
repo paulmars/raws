@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH << './lib'
+libPath = File.join(File.dirname(__FILE__), "..", "lib")
+$LOAD_PATH << libPath
 require 'raws.rb'

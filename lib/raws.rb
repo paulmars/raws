@@ -1,5 +1,20 @@
 require 'rubygems'
 require 'aws-sdk'
+require 'clint'
+
+c = Clint.new
+c.usage do
+  $stderr.puts "Usage: raws [-h|--help]"
+end
+c.help do
+  $stderr.puts "  -h, --help\tshow this help message"
+end
+c.options :help => false, :h => :help
+c.parse ARGV
+if c.options[:help]
+  c.help
+  exit 1
+end
 
 access_key_id = ENV['AWS_ACCESS_KEY_ID']
 secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
