@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'aws-sdk'
+require 'colorize'
 # require 'choice'
 
 # PROGRAM_VERSION = 0.1
@@ -33,7 +34,7 @@ AWS.config(
 ec2 = AWS::EC2.new()
 puts ec2.instances.map{ |i|
   [
-    i.instance_id,
+    i.instance_id.to_s.blue,
     i.status,
     i.ip_address,
     i.dns_name,
