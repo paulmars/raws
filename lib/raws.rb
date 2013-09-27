@@ -39,5 +39,5 @@ puts ec2.instances.map{ |i|
     i.ip_address,
     i.dns_name,
     i.image_id
-  ]
-}.join("\t")
+  ].join("\t")
+}.join("\n")
