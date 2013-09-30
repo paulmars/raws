@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'aws-sdk'
 require 'colorize'
+require 'awesome_print'
 # require 'choice'
 
 # PROGRAM_VERSION = 0.1
@@ -32,12 +33,21 @@ AWS.config(
 )
 
 ec2 = AWS::EC2.new()
-puts ec2.instances.map{ |i|
-  [
+ec2.instances.map{ |i|
+  info = [
     i.instance_id.to_s.blue,
     i.status,
     i.ip_address,
     i.dns_name,
-    i.image_id
+    i.image_id,
+    i.launch_time
   ].join("\t")
-}.join("\n")
+
+  if i.dns_name
+    sshline = "ssh -i ~/.ec2/junokey.pem ec2-user@#{i.dns_name}"
+  else
+    sshline = ""
+  end
+
+  puts [info, sshline].join("\n") + "\n"
+}
