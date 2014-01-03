@@ -40,14 +40,15 @@ ec2.instances.map{ |i|
     i.ip_address,
     i.dns_name,
     i.image_id,
-    i.launch_time
+    i.launch_time,
+    i.key_name
   ].join("\t")
 
   if i.dns_name
-    sshline = "ssh -i ~/.ec2/junokey.pem ec2-user@#{i.dns_name}"
+    sshline = "ssh -i ~/.ec2/#{i.key_name}.pem ec2-user@#{i.dns_name}"
   else
     sshline = ""
   end
 
-  puts [info, sshline].join("\n") + "\n"
+  puts ["====", info, sshline].join("\n") + "\n"
 }
